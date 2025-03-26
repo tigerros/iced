@@ -68,8 +68,8 @@ where
 /// # Examples
 /// ```no_run
 /// //! Sets a 4/1 aspect ratio for a container.
-/// use iced_widget::{aspect_ratio, container, Container};
-/// use iced_widget::container::bordered_box;
+/// # use iced_widget::{aspect_ratio, container, Container};
+/// # use iced_widget::container::bordered_box;
 /// aspect_ratio(4.0, || container("Long").style(bordered_box), Container::into)
 /// ```
 ///
@@ -83,7 +83,7 @@ where
 /// ```no_run
 /// //! Centers a green square with the unused part of the [`Responsive`] being red.
 /// # use iced_widget::{aspect_ratio, center, container};
-/// use iced_widget::core::{Background, Color};
+/// # use iced_widget::core::{Background, Color};
 /// aspect_ratio(
 ///     1.0,
 ///     || container("Green square").style(|_| container::Style {

@@ -1,4 +1,4 @@
-use iced::widget::{button, center, column, container, responsive, row};
+use iced::widget::{button, center, column, container, responsive, row, text};
 use iced::{Background, Color, Element, Length, Size};
 
 fn main() {
@@ -12,33 +12,49 @@ impl AspectRatio {
     fn update(&mut self, _: ()) {}
 
     fn view(&self) -> Element<()> {
+        const SPACING: f32 = 20.0;
+
         center(
             column![
                 responsive(move |size| {
                     let row_height = 40.0;
-                    let square_available =
-                        Size::new(size.width, size.height - row_height);
+                    let square_available = Size::new(
+                        size.width,
+                        size.height - row_height - SPACING,
+                    );
                     let square_size = square_available.aspect_ratio(1.0);
 
-                    column![
-                        container("Green 1:1 square with buttons")
-                            .style(|_| container::Style {
-                                text_color: None,
-                                background: Some(Background::Color(
-                                    Color::from_rgb8(0, 100, 0)
-                                )),
-                                border: Default::default(),
-                                shadow: Default::default(),
-                            })
+                    center(
+                        column![
+                            container("Green 1:1 square with buttons")
+                                .style(|_| container::Style {
+                                    text_color: None,
+                                    background: Some(Background::Color(
+                                        Color::from_rgb8(0, 100, 0)
+                                    )),
+                                    border: Default::default(),
+                                    shadow: Default::default(),
+                                })
+                                .width(square_size.width)
+                                .height(square_size.height),
+                            row![
+                                button(center(text("<"))).width(Length::Fill),
+                                button(center(text(">"))).width(Length::Fill),
+                            ]
+                            .spacing(SPACING)
                             .width(square_size.width)
-                            .height(square_size.height),
-                        row![
-                            button("<").width(Length::Fill),
-                            button(">").width(Length::Fill),
+                            .height(row_height)
                         ]
-                        .width(square_size.width)
-                        .height(row_height)
-                    ]
+                        .spacing(SPACING),
+                    )
+                    .style(|_| container::Style {
+                        text_color: None,
+                        background: Some(Background::Color(Color::from_rgb8(
+                            0, 70, 0,
+                        ))),
+                        border: Default::default(),
+                        shadow: Default::default(),
+                    })
                     .into()
                 }),
                 responsive(move |size| {
@@ -49,7 +65,7 @@ impl AspectRatio {
                             .style(|_| container::Style {
                                 text_color: None,
                                 background: Some(Background::Color(
-                                    Color::from_rgb8(0, 0, 100),
+                                    Color::from_rgb8(0, 0, 150),
                                 )),
                                 border: Default::default(),
                                 shadow: Default::default(),
@@ -60,7 +76,7 @@ impl AspectRatio {
                     .style(|_| container::Style {
                         text_color: None,
                         background: Some(Background::Color(Color::from_rgb8(
-                            0, 0, 80,
+                            0, 0, 70,
                         ))),
                         border: Default::default(),
                         shadow: Default::default(),
@@ -68,9 +84,9 @@ impl AspectRatio {
                     .into()
                 }),
             ]
-            .spacing(20),
+            .spacing(SPACING),
         )
-        .padding(20)
+        .padding(SPACING)
         .into()
     }
 }
